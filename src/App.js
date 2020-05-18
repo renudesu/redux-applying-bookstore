@@ -1,26 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import SignIn from './sign-in/sign-in';
+import SignUp from './sign-up/sign-up';
+import List from './user/list';
+
+import { Provider } from 'react-redux';
+import { createStore, compose, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+import thunk from 'redux-thunk';
+
+import { bookReducer } from './+state/reducer';
+// const initialState = {};
+const composeEnhancers = composeWithDevTools({
+  trace: true,
+  traceLimit: 25,
+})
+const store = createStore(bookReducer, compose(applyMiddleware(thunk), composeEnhancers()));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route path="/signin">
+              <SignIn />
+            </Route>
+            <Route path="/signup">
+              <SignUp />
+            </Route>
+            <Route path="/user/list">
+              <List />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </Provider>
+
+
   );
 }
-
 export default App;
