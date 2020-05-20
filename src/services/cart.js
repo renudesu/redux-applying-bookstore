@@ -8,5 +8,5 @@ export const getCart= (userId) =>{
     return axios.get(`${CART_URL}/${userId}`,{headers:{'x-access-token':localStorage.getItem('token')}});
 }
 export const updateCart = (cart) =>{
-    return axios.put(`${CART_URL}/${cart._id}`,{headers:{'x-access-token':localStorage.getItem('token')}});
+    return axios.put(`${CART_URL}/${cart._id}`,cart,{headers:{'x-access-token':localStorage.getItem('token')}});
 }

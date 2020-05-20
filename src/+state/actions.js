@@ -1,6 +1,7 @@
-import { USER_SAVE, GET_BOOK , CART_LOAD_SUCCESS} from '../commons/constants/store-constants';
+import { USER_SAVE, GET_BOOK, CART_LOAD_SUCCESS } from '../commons/constants/store-constants';
 import { GetBooks } from '../services/books';
-import { getCart } from '../services/cart';
+import { getCart, updateCart, createCart } from '../services/cart';
+
 
 
 const bookList = (data) => {
@@ -9,12 +10,13 @@ const bookList = (data) => {
         payload: data
     }
 }
-const callCart = (data) => {
+const loadCart = (data) => {
     return {
         type: CART_LOAD_SUCCESS,
         payload: data
     }
 }
+
 
 export const saveUser = (userDetails) => {
     return {
@@ -23,19 +25,36 @@ export const saveUser = (userDetails) => {
     }
 }
 
-export const getBook = () => {
+export const getBookListAction = () => {
     return function (dispatch) {
         GetBooks().then((success) => {
             dispatch(bookList(success.data));
         })
     }
 }
-export const getCallCart = () => {
+export const getCartListAction = (id) => {
     var userInfo = localStorage.getItem('user');
     var user = JSON.parse(userInfo);
     return function (dispatch) {
         getCart(user._id).then((success) => {
-            dispatch(callCart(success.data))
+
+            dispatch(loadCart(success.data))
         })
+    }
+}
+export const updateCartAction = (cart) => {
+    return function (dispatch) {
+        updateCart(cart).then((success) => {
+            dispatch(loadCart(success.data))
+        })
+
+    }
+}
+
+export const createCartAction = (cart) => {
+    return function (dispatch) {
+        createCart(cart).then((success) => {
+            dispatch(loadCart(success.data));
+        });
     }
 }

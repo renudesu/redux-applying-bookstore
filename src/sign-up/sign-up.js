@@ -35,7 +35,7 @@ class SignUp extends React.Component {
                 <input type="password" name="password" placeholder="Enter password" onChange={this.onChangeText} />
                 <input type="phoneNumber" name="phoneNumber" placeholder="Enter phoneNumber" onChange={this.onChangeText} />
                 <textarea type="text" name="address" placeholder="address" onChange={this.onChangeText} />
-                <button type="button" onClick={this.signup}>sign up</button>
+                <button type="button"  className="btn btn-primary mt-5" onClick={this.signup}>sign up</button>
             </div>
         );
     }

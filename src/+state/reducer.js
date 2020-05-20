@@ -1,6 +1,7 @@
 import { USER_SAVE, GET_BOOK, CART_LOAD_SUCCESS } from '../commons/constants/store-constants';
 
-export const bookReducer = (state = { user: {}, books: [], cartDetails: [] }, action) => {
+export const bookReducer = (state = { user: {}, books: [], cartDetails: {} }, action) => {
+
     switch (action.type) {
         case USER_SAVE:
             return Object.assign({}, state, { user: action.payload });

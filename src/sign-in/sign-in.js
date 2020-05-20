@@ -31,7 +31,7 @@ class SignIn extends React.Component {
                 <h3>Sign Up</h3>
                 <input type="text" name="username" placeholder="Enter username" onChange={this.onChangeText} />
                 <input type="password" name="password" placeholder="Enter password" onChange={this.onChangeText} />
-                <button type="button" onClick={this.login}>Login</button>
+                <button type="button" className="btn btn-primary mt-5" onClick={this.login}>Login</button>
             </div>
         );
     }
