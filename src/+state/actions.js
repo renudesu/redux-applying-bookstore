@@ -1,5 +1,5 @@
-import { USER_SAVE, GET_BOOK, CART_LOAD_SUCCESS } from '../commons/constants/store-constants';
-import { GetBooks } from '../services/books';
+import { USER_SAVE, GET_BOOK, CART_LOAD_SUCCESS} from '../commons/constants/store-constants';
+import { GetBooks, CreateBook, UpdateBooks,DeleteBookById } from '../services/books';
 import { getCart, updateCart, createCart } from '../services/cart';
 
 
@@ -10,6 +10,12 @@ const bookList = (data) => {
         payload: data
     }
 }
+// const addBook = (data) => {
+//     return {
+//         type: ADD_BOOK,
+//         payload: data
+//     }
+// }
 const loadCart = (data) => {
     return {
         type: CART_LOAD_SUCCESS,
@@ -32,6 +38,28 @@ export const getBookListAction = () => {
         })
     }
 }
+export const createBookAction = (book) => {
+    return function (dispatch) {
+        CreateBook(book).then((success) => {
+            dispatch(getBookListAction());
+        })
+    }
+}
+export const updateBookAction = (book) =>{
+    return function(dispatch){
+        UpdateBooks(book).then((success)=>{
+            dispatch(getBookListAction())
+        })
+    }
+}
+export const deleteBookAction = (id) =>{
+    return function(dispatch){
+        DeleteBookById(id).then((success)=>{
+            dispatch(getBookListAction())
+        })
+    }
+}
+
 export const getCartListAction = (id) => {
     var userInfo = localStorage.getItem('user');
     var user = JSON.parse(userInfo);

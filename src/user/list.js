@@ -41,7 +41,6 @@ class UserList extends React.Component {
             }
             if (index > -1) {
                 orders[index].quantity++;
-                // console.log("quantity inc")
             }
             else {
                 orders.push({
